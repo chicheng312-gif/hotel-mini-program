@@ -1,0 +1,10 @@
+<view class="page">
+  <view class="card">
+    <text class="t">需要帮助？</text>
+    <text class="p">订单、积分、会员等问题可点击下方按钮，通过微信客服会话联系我们。</text>
+    <button class="btn" open-type="contact">联系客服</button>
+  </view>
+  <view class="card muted">
+    <text class="hint">若未开通客服，请在小程序后台配置「客服」入口。</text>
+  </view>
+</view>

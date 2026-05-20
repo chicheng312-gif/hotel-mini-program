@@ -1,0 +1,122 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page" wx:if="{{order}}">
+  <view class="card block">
+    <text class="st {{order.status}}">{{statusText[order.status]}}</text>
+    <text class="meta">下单时间 {{order.createdAtStr}}</text>
+    <text class="meta">订单号 {{order._id}}</text>
+  </view>
+
+  <view class="card block demo-guide" wx:if="{{demoGuide}}">
+    <text class="demo-guide-title">演示流程说明</text>
+    <text class="demo-guide-body">{{demoGuide}}</text>
+  </view>
+
+  <view class="card block" wx:if="{{timeline.length}}">
+    <text class="h">订单跟踪</text>
+    <view class="tl-row" wx:for="{{timeline}}" wx:key="t">
+      <view class="dot {{item.on ? 'on' : ''}}" />
+      <view class="tl-body">
+        <text class="tl-t">{{item.t}}</text>
+        <text class="tl-d">{{item.d}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card block">
+    <text class="h">收货信息</text>
+    <text class="meta">{{order.receiverName}} {{order.receiverPhone}}</text>
+    <text class="meta">{{order.address}}</text>
+  </view>
+
+  <view class="card block">
+    <text class="h">商品</text>
+    <view class="line" wx:for="{{order.lines}}" wx:for-item="line" wx:for-index="idx" wx:key="idx">
+      <image wx:if="{{line.cover}}" class="thumb" src="{{line.cover}}" mode="aspectFill" />
+      <view wx:else class="thumb thumb-ph">图</view>
+      <view class="info">
+        <text class="t">{{line.title}}</text>
+        <text class="sub" wx:if="{{line.specText}}">{{line.specText}}</text>
+        <text class="sub">x{{line.count}}</text>
+        <text class="p">¥{{fmt.price(line.subtotalFen)}}</text>
+        <view wx:if="{{order.status === 'completed'}}" class="rev-row">
+          <text wx:if="{{line.reviewed}}" class="rev-done">已评价</text>
+          <button
+            wx:else
+            class="rev-btn"
+            size="mini"
+            data-pid="{{line.productId}}"
+            data-title="{{line.title}}"
+            bindtap="goReview"
+          >
+            评价
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card block sum">
+    <view class="row"><text>商品合计</text><text>¥{{fmt.price(order.goodsFen)}}</text></view>
+    <view class="row" wx:if="{{order.discountFen > 0}}">
+      <text>会员优惠</text>
+      <text class="d">-¥{{fmt.price(order.discountFen)}}</text>
+    </view>
+    <view class="row strong">
+      <text>实付</text>
+      <text class="pay">¥{{fmt.price(order.payFen)}}</text>
+    </view>
+  </view>
+
+  <view class="actions">
+    <button
+      wx:if="{{order.status === 'pending_payment'}}"
+      class="ghost"
+      bindtap="cancelOrder"
+      disabled="{{actionLoading}}"
+    >
+      取消订单
+    </button>
+    <button
+      wx:if="{{order.status === 'pending_payment'}}"
+      class="btn-primary btn"
+      bindtap="payAgain"
+      loading="{{paying}}"
+    >
+      继续支付
+    </button>
+    <button
+      wx:if="{{order.status === 'pending_payment'}}"
+      class="btn-primary btn ghost-pay"
+      bindtap="mockPayHere"
+      loading="{{paying}}"
+    >
+      模拟支付
+    </button>
+
+    <button
+      wx:if="{{order.status === 'paid'}}"
+      class="ghost"
+      bindtap="demoShip"
+      disabled="{{actionLoading}}"
+    >
+      模拟发货（演示）
+    </button>
+    <button
+      wx:if="{{order.status === 'paid' || order.status === 'shipped'}}"
+      class="ghost"
+      bindtap="requestRefund"
+      disabled="{{actionLoading}}"
+    >
+      申请退款
+    </button>
+    <button
+      wx:if="{{order.status === 'shipped'}}"
+      class="btn-primary btn"
+      bindtap="confirmReceive"
+      disabled="{{actionLoading}}"
+    >
+      确认收货
+    </button>
+  </view>
+</view>
+<view wx:else class="state">订单不存在</view>

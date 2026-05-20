@@ -1,0 +1,24 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty">
+    <text class="t">加载中…</text>
+  </view>
+  <view wx:elif="{{empty}}" class="empty">
+    <text class="t">暂无收藏</text>
+    <text class="s">
+      在商品详情点亮「收藏」会写入本地；同步写入 favorites 集合后，将在此与云端合并展示。
+    </text>
+  </view>
+  <view wx:else class="list">
+    <text class="meta">共 {{merged.length}} 条 · 云端 {{cloudCount}} 条</text>
+    <view
+      class="item"
+      wx:for="{{merged}}"
+      wx:key="*this"
+      data-id="{{item}}"
+      bindtap="openProduct"
+    >
+      <text class="id">商品 ID：{{item}}</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+</view>

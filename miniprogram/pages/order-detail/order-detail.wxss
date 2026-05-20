@@ -1,0 +1,218 @@
+.page {
+  padding: 24rpx 24rpx 60rpx;
+}
+
+.block {
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.st {
+  font-size: 36rpx;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.st.pending_payment {
+  color: #f59e0b;
+}
+
+.st.paid,
+.st.shipped {
+  color: var(--accent);
+}
+
+.st.completed {
+  color: #16a34a;
+}
+
+.meta {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 6rpx;
+}
+
+.h {
+  font-size: 28rpx;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.line {
+  display: flex;
+  margin-top: 16rpx;
+}
+
+.thumb {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  background: #eef1f8;
+}
+
+.thumb-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b8c0d4;
+  font-size: 22rpx;
+}
+
+.info {
+  flex: 1;
+  margin-left: 16rpx;
+}
+
+.t {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.sub {
+  display: block;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  margin-top: 6rpx;
+}
+
+.p {
+  margin-top: 8rpx;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.sum .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  margin-bottom: 12rpx;
+}
+
+.d {
+  color: #16a34a;
+}
+
+.strong {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid var(--border);
+  font-weight: 800;
+}
+
+.pay {
+  color: var(--primary);
+  font-size: 34rpx;
+}
+
+.btn {
+  margin: 32rpx 24rpx 0;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.state {
+  text-align: center;
+  padding: 120rpx;
+  color: var(--text-secondary);
+}
+
+.tl-row {
+  display: flex;
+  margin-top: 16rpx;
+}
+
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: var(--border);
+  margin-top: 10rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.dot.on {
+  background: var(--primary);
+}
+
+.tl-body {
+  flex: 1;
+}
+
+.tl-t {
+  font-size: 28rpx;
+  font-weight: 600;
+  display: block;
+}
+
+.tl-d {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  margin-top: 4rpx;
+  display: block;
+}
+
+.rev-row {
+  margin-top: 12rpx;
+}
+
+.rev-done {
+  font-size: 22rpx;
+  color: #16a34a;
+}
+
+.rev-btn {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  padding: 0 24rpx 48rpx;
+}
+
+.ghost {
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 12rpx;
+  background: #f8fafc;
+  color: var(--text);
+  border: 1rpx solid var(--border);
+  font-size: 28rpx;
+}
+
+.ghost-pay {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #c2410c;
+}
+
+.st.refunding {
+  color: #ea580c;
+}
+
+.demo-guide {
+  background: #f0f9ff;
+  border: 1rpx solid #bae6fd;
+}
+
+.demo-guide-title {
+  display: block;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #0369a1;
+  margin-bottom: 12rpx;
+}
+
+.demo-guide-body {
+  display: block;
+  font-size: 24rpx;
+  color: #0c4a6e;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}

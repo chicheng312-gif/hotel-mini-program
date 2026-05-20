@@ -1,0 +1,86 @@
+{
+  "swipers": {
+    "read": true,
+    "write": false
+  },
+  "products": {
+    "read": true,
+    "write": false
+  },
+  "categories": {
+    "read": true,
+    "write": false
+  },
+  "carts": {
+    "read": "doc._openid == auth.openid",
+    "create": "auth != null",
+    "update": "doc._openid == auth.openid",
+    "delete": "doc._openid == auth.openid"
+  },
+  "cart": {
+    "read": "doc._openid == auth.openid",
+    "create": "auth != null",
+    "update": "doc._openid == auth.openid",
+    "delete": "doc._openid == auth.openid"
+  },
+  "order_items": {
+    "read": "doc.openId == auth.openid || doc.openid == auth.openid",
+    "write": false
+  },
+  "reviews": {
+    "read": "doc.openid == auth.openid",
+    "write": false
+  },
+  "orders": {
+    "read": "doc.openId == auth.openid || doc.openid == auth.openid || doc._openid == auth.openid",
+    "write": false
+  },
+  "members": {
+    "read": "doc._openid == auth.openid",
+    "write": false
+  },
+  "product_reviews": {
+    "read": true,
+    "write": false
+  },
+  "users": {
+    "read": "doc.openid == auth.openid",
+    "write": false
+  },
+  "favorites": {
+    "read": "doc._openid == auth.openid || doc.openid == auth.openid",
+    "write": "doc._openid == auth.openid"
+  },
+  "user_sign_record": {
+    "read": "doc.openid == auth.openid",
+    "write": false
+  },
+  "user_points_log": {
+    "read": "doc.openid == auth.openid",
+    "write": false
+  },
+  "user_growth_log": {
+    "read": "doc.openid == auth.openid",
+    "write": false
+  },
+  "user_invite": {
+    "read": "doc.openid == auth.openid || doc.inviterOpenid == auth.openid",
+    "write": false
+  },
+  "invite_reward_log": {
+    "read": "doc.openid == auth.openid",
+    "write": false
+  },
+  "member_day_activity": {
+    "read": true,
+    "write": false
+  },
+  "points_exchange_goods": {
+    "read": true,
+    "write": false
+  },
+  "points_exchange_order": {
+    "read": "doc.openid == auth.openid",
+    "write": false
+  }
+}

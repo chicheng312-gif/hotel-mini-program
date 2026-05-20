@@ -1,0 +1,46 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view class="card block">
+    <text class="label">收货人</text>
+    <input class="input" placeholder="姓名" value="{{receiverName}}" bindinput="onName" />
+    <input class="input" type="number" placeholder="手机号" value="{{receiverPhone}}" bindinput="onPhone" />
+    <textarea
+      class="textarea"
+      placeholder="详细地址"
+      value="{{address}}"
+      bindinput="onAddr"
+      auto-height
+    />
+  </view>
+
+  <view class="card block" wx:for="{{items}}" wx:key="lineKey">
+    <view class="row">
+      <image wx:if="{{item.cover}}" class="thumb" src="{{item.cover}}" mode="aspectFill" />
+      <view wx:else class="thumb thumb-ph">图</view>
+      <view class="info">
+        <text class="title">{{item.title}}</text>
+        <text class="sub spec" wx:if="{{item.specText}}">{{item.specText}}</text>
+        <text class="sub">x{{item.count}}</text>
+        <text class="price">¥{{fmt.price(item.subtotalFen)}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card block pay-row">
+    <text>商品金额</text>
+    <text>¥{{fmt.price(goodsFen)}}</text>
+  </view>
+  <view class="card block pay-row muted" wx:if="{{discountFen > 0}}">
+    <text>会员折扣</text>
+    <text class="discount">-¥{{fmt.price(discountFen)}}</text>
+  </view>
+  <view class="card block pay-row total">
+    <text>应付</text>
+    <text class="pay">¥{{fmt.price(payFen)}}</text>
+  </view>
+
+  <view class="bottom safe-bottom">
+    <button class="btn-primary pay-btn" loading="{{paying}}" bindtap="submitPay">微信支付</button>
+    <button wx:if="{{allowMock}}" class="mock-btn" bindtap="mockPay">模拟支付（开发用）</button>
+  </view>
+</view>

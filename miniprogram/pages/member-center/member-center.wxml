@@ -1,0 +1,18 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="state">加载中…</view>
+  <block wx:else>
+    <view class="card hero">
+      <text class="h-name">{{user.levelName}}</text>
+      <text class="h-sub">成长值 {{user.growth}} · 积分 {{user.points}}</text>
+      <text class="h-next" wx:if="{{nextLevel.target != null}}">
+        距离下一级还差 {{nextLevel.need}} 成长值（目标 {{nextLevel.target}}）
+      </text>
+      <text class="h-next" wx:else>已达最高等级，继续保持活跃～</text>
+    </view>
+    <view class="sec-title">会员权益（购物折扣）</view>
+    <view class="card rcard" wx:for="{{rights}}" wx:key="level">
+      <text class="r-level">{{item.level}}</text>
+      <text class="r-desc">{{item.discount}} · {{item.need}}</text>
+    </view>
+  </block>
+</view>

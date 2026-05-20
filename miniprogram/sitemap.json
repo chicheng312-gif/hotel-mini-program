@@ -1,0 +1,4 @@
+{
+  "desc": "云选商城",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

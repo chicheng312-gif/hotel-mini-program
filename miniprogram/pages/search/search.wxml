@@ -1,0 +1,98 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <!-- 搜索框：iOS 大圆角 -->
+  <view class="bar ios-card">
+    <text class="ico">🔍</text>
+    <input
+      class="input"
+      placeholder="搜索商品"
+      value="{{keyword}}"
+      confirm-type="search"
+      bindinput="onInput"
+      bindconfirm="onSearchConfirm"
+    />
+    <text class="go" bindtap="runSearch">搜索</text>
+  </view>
+
+  <!-- 排序 / 筛选：切换后重新查询 -->
+  <scroll-view class="chips" scroll-x enable-flex show-scrollbar="{{false}}">
+    <view
+      class="chip {{sortKind === 'default' ? 'on' : ''}}"
+      data-kind="default"
+      bindtap="onSort"
+    >综合</view>
+    <view
+      class="chip {{sortKind === 'sales' ? 'on' : ''}}"
+      data-kind="sales"
+      bindtap="onSort"
+    >销量</view>
+    <view
+      class="chip {{sortKind === 'priceAsc' ? 'on' : ''}}"
+      data-kind="priceAsc"
+      bindtap="onSort"
+    >价格 ↑</view>
+    <view
+      class="chip {{sortKind === 'priceDesc' ? 'on' : ''}}"
+      data-kind="priceDesc"
+      bindtap="onSort"
+    >价格 ↓</view>
+  </scroll-view>
+
+  <view class="filter ios-card">
+    <text class="f-label">价格区间（元）</text>
+    <view class="f-row">
+      <input class="f-input" type="digit" placeholder="最低" value="{{minPrice}}" bindinput="onMin" />
+      <text class="f-dash">—</text>
+      <input class="f-input" type="digit" placeholder="最高" value="{{maxPrice}}" bindinput="onMax" />
+      <button class="f-btn" size="mini" bindtap="runSearch">应用</button>
+    </view>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="hist-block" wx:if="{{history.length && !hasSearched}}">
+    <view class="hist-head">
+      <text class="hist-title">历史记录</text>
+      <text class="hist-clear" bindtap="clearHistory">清空</text>
+    </view>
+    <view class="hist-tags">
+      <text
+        class="hist-chip"
+        wx:for="{{history}}"
+        wx:key="*this"
+        data-kw="{{item}}"
+        bindtap="tapHistory"
+      >{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 结果列表：双列 -->
+  <view class="section-title" wx:if="{{hasSearched}}">搜索结果</view>
+  <view class="feed" wx:if="{{list.length}}">
+    <view
+      class="card ios-card"
+      wx:for="{{list}}"
+      wx:key="_id"
+      data-id="{{item._id}}"
+      bindtap="openProduct"
+    >
+      <image
+        wx:if="{{item.coverUrl || (item.images && item.images.length)}}"
+        class="cover"
+        src="{{item.coverUrl || item.images[0]}}"
+        mode="aspectFill"
+      />
+      <view class="cover ph" wx:else>图</view>
+      <view class="body">
+        <text class="name">{{item.name || item.title}}</text>
+        <text class="price">¥{{fmt.itemPriceYuan(item)}}</text>
+        <text class="sales" wx:if="{{item.sales != null}}">售 {{item.sales}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{hasSearched && !loading && !list.length}}">没有找到相关商品</view>
+  <view class="footer" wx:if="{{list.length}}">
+    <text wx:if="{{loadingMore}}">加载中…</text>
+    <text wx:elif="{{!hasMore}}">没有更多了</text>
+  </view>
+</view>

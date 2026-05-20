@@ -1,0 +1,55 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="state">加载中…</view>
+  <block wx:else>
+    <view class="card code-card">
+      <text class="label">我的邀请码</text>
+      <text class="code">{{inviteCode || '—'}}</text>
+      <button size="mini" bindtap="copyCode" disabled="{{!inviteCode}}">复制</button>
+      <text class="hint">单级邀请：新用户仅可绑定一位邀请人，云函数会校验循环邀请。</text>
+    </view>
+
+    <view class="card">
+      <text class="t">绑定邀请码</text>
+      <input
+        class="ipt"
+        placeholder="输入好友邀请码"
+        value="{{bindInput}}"
+        bindinput="onInput"
+      />
+      <button class="btn" bindtap="bind">确认绑定</button>
+    </view>
+
+    <view class="card">
+      <text class="t">数据概览</text>
+      <view class="row"><text>已邀请人数</text><text class="strong">{{invited}}</text></view>
+      <view class="row"><text>累计奖励积分</text><text class="strong">{{rewardPts}}</text></view>
+    </view>
+
+    <view class="card cell" bindtap="goSub" data-title="邀请海报">
+      <text>邀请海报</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="card cell" bindtap="goSub" data-title="邀请二维码">
+      <text>邀请二维码</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="card cell" bindtap="goSub" data-title="邀请排行榜">
+      <text>邀请排行榜</text>
+      <text class="arrow">›</text>
+    </view>
+
+    <view class="sec">邀请记录</view>
+    <view wx:if="{{!list.length}}" class="state">暂无记录</view>
+    <view class="card mini" wx:for="{{list}}" wx:key="_id">
+      <text class="m">被邀请人 {{item.openid}}</text>
+      <text class="s">{{item.timeStr}}</text>
+    </view>
+
+    <view class="sec">奖励明细</view>
+    <view wx:if="{{!rewards.length}}" class="state">暂无奖励流水</view>
+    <view class="card mini" wx:for="{{rewards}}" wx:key="_id">
+      <text class="m">{{item.type}} · +{{item.rewardPoints}} 积分</text>
+      <text class="s">{{item.timeStr}} {{item.remark}}</text>
+    </view>
+  </block>
+</view>

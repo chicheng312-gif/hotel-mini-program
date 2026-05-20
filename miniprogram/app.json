@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/search/search",
+    "pages/category-products/category-products",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/profile/profile",
+    "pages/product-detail/product-detail",
+    "pages/checkout/checkout",
+    "pages/orders/orders",
+    "pages/order-detail/order-detail",
+    "pages/order-review/order-review",
+    "pages/common/page-placeholder/page-placeholder",
+    "pages/member-center/member-center",
+    "pages/points-mall/points-mall",
+    "pages/invite/invite",
+    "pages/member-day/member-day",
+    "pages/my-points/my-points",
+    "pages/favorites/favorites",
+    "pages/common-sub/common-sub",
+    "pages/exchange-orders/exchange-orders",
+    "pages/service/service"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FAFBFF",
+    "navigationBarTitleText": "云选商城",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F4F6FB"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#9AA0B4",
+    "selectedColor": "#FF5C4D",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "首页" },
+      { "pagePath": "pages/category/category", "text": "分类" },
+      { "pagePath": "pages/cart/cart", "text": "购物车" },
+      { "pagePath": "pages/profile/profile", "text": "我的" }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

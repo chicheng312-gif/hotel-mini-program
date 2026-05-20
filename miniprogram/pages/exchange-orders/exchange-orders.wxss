@@ -1,0 +1,61 @@
+.page {
+  padding: 24rpx 24rpx 48rpx;
+  background: var(--bg);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.state {
+  text-align: center;
+  padding: 120rpx 24rpx;
+  color: var(--text-secondary);
+  font-size: 28rpx;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.item {
+  padding: 24rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.no {
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.st {
+  font-size: 24rpx;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.sub {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.time {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+
+.foot {
+  text-align: center;
+  padding: 24rpx;
+  color: var(--text-secondary);
+  font-size: 24rpx;
+}

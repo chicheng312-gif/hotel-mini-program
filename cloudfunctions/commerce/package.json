@@ -1,0 +1,9 @@
+{
+  "name": "commerce",
+  "version": "1.0.0",
+  "description": "电商下单、支付、会员、演示数据",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

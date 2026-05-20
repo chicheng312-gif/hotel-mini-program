@@ -1,0 +1,42 @@
+.page {
+  padding: 24rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: var(--bg);
+}
+
+.state {
+  padding: 80rpx 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.act,
+.empty {
+  padding: 24rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: 900;
+  display: block;
+}
+
+.line {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  display: block;
+  line-height: 1.5;
+}
+
+.row {
+  font-size: 26rpx;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.card {
+  padding: 22rpx;
+  margin-bottom: 16rpx;
+}

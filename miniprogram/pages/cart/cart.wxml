@@ -1,0 +1,56 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page {{items.length ? 'page-with-footer' : ''}}">
+  <view wx:if="{{loading}}" class="state">加载中…</view>
+  <view wx:elif="{{!items.length}}" class="empty card">
+    <text class="empty-title">购物车是空的</text>
+    <text class="empty-desc">去首页逛逛，发现心仪好物</text>
+    <button class="btn-primary empty-btn" bindtap="goHome">去逛逛</button>
+  </view>
+  <block wx:else>
+    <view wx:if="{{hasStockIssue}}" class="warn card">
+      <text>部分商品库存偏紧，仍可尝试结算，以提交订单时校验为准</text>
+    </view>
+
+    <view class="toolbar card">
+      <view class="tb-left" bindtap="toggleAll">
+        <view class="chk {{allSelected ? 'on' : ''}}" />
+        <text>全选</text>
+      </view>
+      <text class="tb-del" bindtap="batchDelete">删除选中</text>
+    </view>
+
+    <view wx:for="{{items}}" wx:key="lineKey" class="line card">
+      <view class="sel" data-line-key="{{item.lineKey}}" bindtap="toggleSelect">
+        <view class="chk {{item.selected ? 'on' : ''}}" />
+      </view>
+      <image wx:if="{{item.cover}}" class="thumb" src="{{item.cover}}" mode="aspectFill" />
+      <view wx:else class="thumb thumb-ph">图</view>
+      <view class="body">
+        <text class="title">{{item.title}}</text>
+        <text class="spec" wx:if="{{item.specText}}">{{item.specText}}</text>
+        <text class="stock-warn" wx:if="{{item.stockShort}}">库存紧张（当前库存 {{item.stock}}）</text>
+        <view class="foot">
+          <text class="price">¥{{fmt.price(item.priceFen)}}</text>
+          <view class="stepper">
+            <text class="step" data-line-key="{{item.lineKey}}" data-d="-1" bindtap="change">−</text>
+            <text class="num">{{item.count}}</text>
+            <text class="step" data-line-key="{{item.lineKey}}" data-d="1" bindtap="change">+</text>
+          </view>
+        </view>
+        <text class="del" data-line-key="{{item.lineKey}}" bindtap="remove">删除</text>
+      </view>
+    </view>
+
+    <!-- 合计 + 结算：紧贴自定义 Tab 栏上方（见 cart.wxss 的 bottom） -->
+    <view class="cart-footer">
+      <view class="cart-footer-inner">
+        <view class="cart-footer-sum">
+          <text class="sum-label">合计</text>
+          <text class="sum-price">¥{{fmt.price(totalFen)}}</text>
+          <text class="sum-count">已选 {{count}} 件</text>
+        </view>
+        <button class="btn-primary checkout-btn" bindtap="checkout">去结算</button>
+      </view>
+    </view>
+  </block>
+</view>

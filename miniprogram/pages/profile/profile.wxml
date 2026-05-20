@@ -1,0 +1,160 @@
+<view class="page {{themeClass}}">
+  <view wx:if="{{skeleton}}" class="skeleton-wrap">
+    <view class="sk-line sk-a" />
+    <view class="sk-line sk-b" />
+    <view class="sk-line sk-c" />
+    <view class="sk-grid">
+      <view class="sk-pill" wx:for="{{5}}" wx:key="*this" />
+    </view>
+    <view class="sk-line sk-d" />
+    <view class="sk-line sk-d" />
+  </view>
+
+  <block wx:else>
+    <view class="hero card">
+      <view class="hero-top">
+        <view class="avatar-wrap" bindtap="onTapAvatar">
+          <image
+            wx:if="{{user.avatarUrl}}"
+            class="avatar-img"
+            src="{{user.avatarUrl}}"
+            mode="aspectFill"
+          />
+          <view wx:else class="avatar-fallback">访</view>
+        </view>
+        <view class="hero-meta">
+          <text class="nick">{{user.nickName || '点击头像授权昵称'}}</text>
+          <text class="sub">{{user.levelName || '普通会员'}} · 成长值 {{user.growth || 0}}</text>
+          <view class="stat-row">
+            <text class="pill">积分 {{user.points || 0}}</text>
+            <text class="pill">连续签到 {{user.continuousSignDays || 0}} 天</text>
+          </view>
+          <view class="phone-row">
+            <text class="phone-txt">{{user.phone ? user.phone : '未绑定手机号'}}</text>
+            <button
+              class="bind-phone"
+              size="mini"
+              open-type="getPhoneNumber"
+              bindgetphonenumber="onGetPhoneNumber"
+            >
+              {{user.phone ? '更换' : '绑定'}}
+            </button>
+          </view>
+        </view>
+      </view>
+      <view class="sign-row">
+        <button
+          class="sign-btn {{signedToday ? 'disabled' : ''}}"
+          size="mini"
+          disabled="{{signedToday}}"
+          bindtap="onSign"
+        >
+          {{signedToday ? '今日已签' : '每日签到'}}
+        </button>
+        <text class="sign-tip">连续 3 / 7 / 30 天额外奖励积分</text>
+      </view>
+    </view>
+
+    <view class="card block" bindtap="goMemberCard">
+      <view class="block-head">
+        <text class="block-title">会员中心</text>
+        <text class="block-more">权益详情 ›</text>
+      </view>
+      <text class="block-body">{{rightsLine}}</text>
+      <text class="block-foot" wx:if="{{nextTargetGrowth}}">
+        距离下一等级还需成长值 {{nextNeedGrowth}}（目标 {{nextTargetGrowth}}）
+      </text>
+      <text class="block-foot" wx:else>已达最高等级，感谢支持</text>
+    </view>
+
+    <view class="card block">
+      <view class="block-head">
+        <text class="block-title">我的订单</text>
+        <view class="block-more" bindtap="goOrdersAll">全部 ›</view>
+      </view>
+      <view class="order-row">
+        <view
+          class="order-cell"
+          wx:for="{{orderChipsDisplay}}"
+          wx:key="key"
+          data-key="{{item.key}}"
+          bindtap="goOrder"
+        >
+          <view class="order-ico">{{item.label.slice(0, 1)}}</view>
+          <text class="order-label">{{item.label}}</text>
+          <view wx:if="{{item.count > 0}}" class="badge">{{item.count}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card block" bindtap="goPointsMall">
+      <view class="block-head">
+        <text class="block-title">积分商城</text>
+        <text class="block-more">兑换商品 / 优惠券 / 记录 ›</text>
+      </view>
+      <view class="mall-preview" wx:if="{{exchangePreview.length}}">
+        <view class="mall-item" wx:for="{{exchangePreview}}" wx:for-index="ix" wx:key="ix">
+          <image class="mall-cover" src="{{item.coverImage}}" mode="aspectFill" />
+          <text class="mall-name">{{item.productName}}</text>
+          <text class="mall-pts">{{item.needPoints}} 积分</text>
+        </view>
+      </view>
+      <view wx:else class="empty-inline">暂无可兑商品，稍后再试</view>
+      <text class="coupon-hint">券：5 元=500 分 · 10 元=1000 分 · 20 元=2000 分</text>
+    </view>
+
+    <view class="card block" bindtap="goInviteBlock">
+      <view class="block-head">
+        <text class="block-title">邀请有礼</text>
+        <text class="block-more">海报 / 二维码 / 记录 ›</text>
+      </view>
+      <view class="invite-row">
+        <text class="invite-code">我的邀请码：{{user.inviteCode || '—'}}</text>
+        <text class="invite-stat">已邀请 {{inviteCount}} 人 · 奖励积分累计 {{inviteRewardPoints}}</text>
+      </view>
+    </view>
+
+    <view class="card block" bindtap="goMemberDay">
+      <view class="block-head">
+        <text class="block-title">会员日活动</text>
+        <text class="block-more">专属折扣 · 双倍积分 · 专属券 ›</text>
+      </view>
+      <text class="block-body">{{memberDayTitle || '暂无进行中的会员日'}}</text>
+      <text class="block-foot">{{memberDaySub}}</text>
+    </view>
+
+    <view class="card block">
+      <view class="block-head">
+        <text class="block-title">功能入口</text>
+      </view>
+      <view class="grid">
+        <view
+          class="grid-item"
+          wx:for="{{grid}}"
+          wx:key="label"
+          data-url="{{item.url}}"
+          bindtap="goGrid"
+        >
+          <text class="grid-t">{{item.label}}</text>
+        </view>
+      </view>
+      <text class="fav-hint">云收藏 {{favoritesCount}} 件（含云端 favorites）</text>
+    </view>
+
+    <view class="card block menu">
+      <view
+        class="menu-cell"
+        wx:for="{{settings}}"
+        wx:key="label"
+        data-index="{{index}}"
+        bindtap="onSettingTap"
+      >
+        <text>{{item.label}}</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <button class="logout" bindtap="logout">退出登录</button>
+    <view class="safe-bottom" />
+  </block>
+</view>

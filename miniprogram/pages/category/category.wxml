@@ -1,0 +1,41 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view class="side">
+    <view
+      wx:for="{{categories}}"
+      wx:key="_id"
+      class="side-item {{catId === item._id ? 'on' : ''}}"
+      data-id="{{item._id}}"
+      bindtap="onSelectCat"
+    >
+      {{item.name}}
+    </view>
+  </view>
+  <scroll-view class="main" scroll-y>
+    <view wx:if="{{loading}}" class="state">加载中…</view>
+    <view wx:elif="{{!list.length}}" class="state">该分类下暂无商品</view>
+    <view
+      wx:for="{{list}}"
+      wx:key="_id"
+      class="row card"
+      data-id="{{item._id}}"
+      bindtap="openProduct"
+    >
+      <image
+        wx:if="{{item.coverUrl || (item.images && item.images.length)}}"
+        class="thumb"
+        src="{{item.coverUrl || item.images[0]}}"
+        mode="aspectFill"
+      />
+      <view wx:else class="thumb thumb-ph">图</view>
+      <view class="info">
+        <text class="title">{{item.name || item.title}}</text>
+        <text class="sub">{{item.subtitle || item.description || '品质保证 · 极速发货'}}</text>
+        <view class="row-foot">
+          <text class="price">¥{{fmt.itemPriceYuan(item)}}</text>
+          <button class="mini-add" catchtap="quickAdd" data-id="{{item._id}}">+</button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

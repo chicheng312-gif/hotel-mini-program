@@ -1,0 +1,8 @@
+{
+  "name": "cloudbase-mall-miniprogram",
+  "version": "1.0.0",
+  "description": "微信小程序端依赖（Vant Weapp）",
+  "dependencies": {
+    "@vant/weapp": "^1.11.6"
+  }
+}

@@ -1,0 +1,16 @@
+<view class="page">
+  <view wx:if="{{loading && !list.length}}" class="state">加载中…</view>
+  <view wx:elif="{{!list.length}}" class="state">暂无兑换记录</view>
+  <view wx:else class="list">
+    <view class="card item" wx:for="{{list}}" wx:key="_id">
+      <view class="row">
+        <text class="no">{{item.exchangeNo || item._id}}</text>
+        <text class="st">{{item.status || '—'}}</text>
+      </view>
+      <text class="sub">商品 {{item.goodsId || '—'}} · 消耗 {{item.needPoints || 0}} 积分</text>
+      <text class="time">{{item.timeStr}}</text>
+    </view>
+  </view>
+  <view wx:if="{{loading && list.length}}" class="foot">加载更多…</view>
+  <view wx:elif="{{finished && list.length}}" class="foot">没有更多了</view>
+</view>

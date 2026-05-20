@@ -1,0 +1,50 @@
+.page {
+  padding: 24rpx;
+  background: var(--bg);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.t {
+  font-size: 32rpx;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.p {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  display: block;
+  margin-bottom: 24rpx;
+}
+
+.btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 16rpx;
+  background: linear-gradient(135deg, #ff6b4a 0%, #ff3d5c 100%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+}
+
+.muted {
+  background: #f8fafc;
+}
+
+.hint {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

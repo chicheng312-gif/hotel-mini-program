@@ -1,0 +1,9 @@
+{
+  "name": "userCenter",
+  "version": "1.0.0",
+  "description": "用户中心：资料、签到、订单统计、邀请与会员日聚合（服务端校验 OPENID）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

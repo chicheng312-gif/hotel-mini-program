@@ -1,0 +1,23 @@
+# 依赖
+node_modules/
+miniprogram/node_modules/
+
+# 微信开发者工具「构建 npm」生成（可重新构建，通常不提交）
+miniprogram/miniprogram_npm/
+
+# 本地 / 隐私配置（含 AppID、密钥等）
+project.private.config.json
+**/project.private.config.json
+
+# 日志与系统文件
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# 云函数 node_modules（上传部署时由工具打包，可不纳入 Git）
+cloudfunctions/**/node_modules/

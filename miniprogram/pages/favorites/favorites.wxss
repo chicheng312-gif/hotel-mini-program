@@ -1,0 +1,58 @@
+.page {
+  padding: 24rpx;
+  background: var(--bg);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.empty {
+  padding: 120rpx 24rpx;
+  text-align: center;
+}
+
+.empty .t {
+  font-size: 30rpx;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.empty .s {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  display: block;
+}
+
+.meta {
+  display: block;
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  margin-bottom: 12rpx;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 24rpx;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.id {
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 32rpx;
+  color: #cbd5e1;
+}

@@ -1,0 +1,19 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="state">加载中…</view>
+  <block wx:else>
+    <view class="card act" wx:if="{{activity}}">
+      <text class="title">{{activity.title || '会员日活动'}}</text>
+      <text class="line">开始：{{activity.startTime}}</text>
+      <text class="line">结束：{{activity.endTime}}</text>
+      <text class="line" wx:if="{{activity.discountRate}}">折扣系数：{{activity.discountRate}}</text>
+      <text class="line" wx:if="{{activity.doublePoints}}">双倍积分：已开启</text>
+    </view>
+    <view class="card empty" wx:else>
+      <text class="title">暂无进行中的会员日活动</text>
+      <text class="line">请在云数据库 member_day_activity 写入 status=active 且在时间窗内。</text>
+    </view>
+    <view class="card" wx:for="{{lines}}" wx:key="*this">
+      <text class="row">{{item}}</text>
+    </view>
+  </block>
+</view>

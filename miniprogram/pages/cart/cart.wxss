@@ -1,0 +1,263 @@
+page {
+  --cart-footer-h: calc(32rpx + 88rpx + 32rpx);
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx 24rpx 32rpx;
+  box-sizing: border-box;
+  background: var(--bg);
+}
+
+.page-with-footer {
+  padding-bottom: calc(var(--tab-bar-h) + var(--cart-footer-h) + 16rpx);
+}
+
+.warn {
+  padding: 20rpx 24rpx;
+  font-size: 24rpx;
+  color: #b45309;
+  background: #fffbeb;
+  margin-bottom: 16rpx;
+  border: 1rpx solid #fde68a;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.tb-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.tb-del {
+  font-size: 26rpx;
+  color: var(--primary);
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.tb-del:active {
+  opacity: 0.65;
+}
+
+.chk {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  border: 2rpx solid var(--text-tertiary);
+  box-sizing: border-box;
+  transition: border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.chk.on {
+  border-color: var(--primary);
+  background: var(--primary);
+  box-shadow: inset 0 0 0 6rpx #fff;
+}
+
+.line {
+  display: flex;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  align-items: flex-start;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.line:active {
+  transform: scale(0.998);
+}
+
+.sel {
+  padding: 72rpx 12rpx 0 0;
+}
+
+.thumb {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+  flex-shrink: 0;
+}
+
+.thumb-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-size: 26rpx;
+}
+
+.body {
+  flex: 1;
+  margin-left: 20rpx;
+  position: relative;
+  padding-bottom: 36rpx;
+}
+
+.title {
+  font-size: 28rpx;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.spec {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.stock-warn {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #dc2626;
+}
+
+.foot {
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  background: var(--surface-muted);
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.step {
+  width: 56rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: var(--text);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.step:active {
+  background: var(--primary-soft);
+}
+
+.num {
+  min-width: 48rpx;
+  text-align: center;
+  font-weight: 700;
+}
+
+.del {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.del:active {
+  color: var(--primary);
+}
+
+.cart-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  bottom: var(--tab-bar-h);
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom) * 0);
+  background: rgba(255, 255, 255, 0.98);
+  border-top: 1rpx solid var(--border);
+  box-shadow: 0 -8rpx 24rpx rgba(28, 31, 46, 0.06);
+}
+
+.cart-footer-inner {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.cart-footer-sum {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.sum-label {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+
+.sum-price {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: var(--price-color);
+}
+
+.sum-count {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+
+.checkout-btn {
+  flex-shrink: 0;
+  min-width: 200rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin: 0;
+  padding: 0 32rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.empty {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  margin-top: 80rpx;
+}
+
+.empty-title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.empty-desc {
+  display: block;
+  margin-top: 16rpx;
+  color: var(--text-secondary);
+  font-size: 26rpx;
+}
+
+.empty-btn {
+  margin-top: 40rpx;
+  width: 280rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.state {
+  text-align: center;
+  padding: 80rpx;
+  color: var(--text-secondary);
+}
+
+.price {
+  color: var(--price-color);
+  font-weight: 700;
+}

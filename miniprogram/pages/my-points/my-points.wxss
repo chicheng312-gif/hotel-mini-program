@@ -1,0 +1,56 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-bottom: 40rpx;
+}
+
+.state {
+  padding: 80rpx 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.list {
+  padding: 16rpx 24rpx;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid var(--border);
+}
+
+.t {
+  font-size: 28rpx;
+  font-weight: 600;
+  display: block;
+}
+
+.s {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.delta {
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.delta.plus {
+  color: #16a34a;
+}
+
+.delta.minus {
+  color: #ef4444;
+}
+
+.foot {
+  text-align: center;
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  padding: 16rpx 0 40rpx;
+}

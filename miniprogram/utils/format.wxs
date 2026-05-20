@@ -1,0 +1,36 @@
+var price = function (fen) {
+  var n = fen ? fen / 100 : 0;
+  return n.toFixed(2);
+};
+
+/** 列表卡片：兼容 price(元) 与 priceFen */
+var itemPriceYuan = function (item) {
+  if (!item) return "0";
+  if (item.price !== undefined && item.price !== null) {
+    var y = parseFloat(item.price);
+    if (isNaN(y)) return "0";
+    return y % 1 === 0 ? y.toFixed(0) : y.toFixed(2);
+  }
+  if (item.priceFen !== undefined && item.priceFen !== null) {
+    var f = item.priceFen / 100;
+    return f.toFixed(2);
+  }
+  return "0";
+};
+
+var itemOriginalYuan = function (item) {
+  if (!item) return "";
+  if (item.originalPrice !== undefined && item.originalPrice !== null) {
+    var y = parseFloat(item.originalPrice);
+    if (isNaN(y)) return "";
+    return y % 1 === 0 ? y.toFixed(0) : y.toFixed(2);
+  }
+  if (item.originalPriceFen !== undefined && item.originalPriceFen !== null) {
+    return (item.originalPriceFen / 100).toFixed(2);
+  }
+  return "";
+};
+
+module.exports.price = price;
+module.exports.itemPriceYuan = itemPriceYuan;
+module.exports.itemOriginalYuan = itemOriginalYuan;

@@ -1,0 +1,21 @@
+{
+  "version": "2.0",
+  "envId": "${envId}",
+  "functionRoot": "cloudfunctions",
+  "functions": [
+    {
+      "name": "commerce",
+      "timeout": 20,
+      "runtime": "Nodejs16.13",
+      "installDependency": true,
+      "handler": "index.main"
+    },
+    {
+      "name": "payNotify",
+      "timeout": 10,
+      "runtime": "Nodejs16.13",
+      "installDependency": true,
+      "handler": "index.main"
+    }
+  ]
+}

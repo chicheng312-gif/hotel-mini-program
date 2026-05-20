@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="card">
+    <text class="t">积分兑换优惠券（规则）</text>
+    <view class="row" wx:for="{{coupons}}" wx:key="label">
+      <text>{{item.label}}</text>
+      <text class="p">{{item.pts}} 积分</text>
+    </view>
+    <button class="btn" size="mini" bindtap="goSub" data-title="积分兑换优惠券">
+      去兑换（示例入口）
+    </button>
+  </view>
+
+  <view class="card">
+    <view class="head">
+      <text class="t">可兑换商品</text>
+      <text class="sub" bindtap="goMyPoints">积分流水 ›</text>
+    </view>
+    <view wx:if="{{loading}}" class="state">加载中…</view>
+    <view wx:elif="{{!goods.length}}" class="state">暂无可兑商品，请在控制台维护 points_exchange_goods</view>
+    <view wx:else class="list">
+      <view class="item" wx:for="{{goods}}" wx:key="_id">
+        <image class="cover" src="{{item.coverImage}}" mode="aspectFill" wx:if="{{item.coverImage}}" />
+        <view class="meta">
+          <text class="name">{{item.productName}}</text>
+          <text class="pts">{{item.needPoints}} 积分 · 库存 {{item.stock}}</text>
+        </view>
+      </view>
+    </view>
+    <button class="btn" size="mini" bindtap="goExchangeOrders">兑换记录</button>
+  </view>
+</view>

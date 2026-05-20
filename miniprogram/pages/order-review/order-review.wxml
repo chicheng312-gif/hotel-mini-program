@@ -1,0 +1,32 @@
+<view class="page" wx:if="{{orderId}}">
+  <view class="card">
+    <text class="t">{{title || '商品'}}</text>
+    <text class="sub">订单 {{orderId}}</text>
+  </view>
+  <view class="card">
+    <text class="label">评分</text>
+    <view class="stars">
+      <text
+        wx:for="{{[1,2,3,4,5]}}"
+        wx:key="*this"
+        class="star {{rating >= item ? 'on' : ''}}"
+        data-n="{{item}}"
+        bindtap="onPickStar"
+      >
+        ★
+      </text>
+    </view>
+  </view>
+  <view class="card">
+    <text class="label">评价内容</text>
+    <textarea
+      class="area"
+      maxlength="500"
+      placeholder="说说使用感受，帮助其他买家～"
+      value="{{content}}"
+      bindinput="onContent"
+    />
+  </view>
+  <button class="btn-primary submit" bindtap="submit" loading="{{submitting}}">提交评价</button>
+</view>
+<view wx:else class="empty">参数错误</view>

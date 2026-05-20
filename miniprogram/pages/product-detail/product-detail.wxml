@@ -1,0 +1,172 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page" wx:if="{{product}}">
+  <!-- 轮播：首项可为视频（videoUrl），其余为图片；图片点击可预览 -->
+  <swiper
+    class="gallery"
+    circular
+    indicator-dots
+    indicator-color="rgba(255,255,255,0.35)"
+    indicator-active-color="#FFFFFF"
+    wx:if="{{galleryMedia.length}}"
+    bindchange="onGalleryChange"
+  >
+    <swiper-item
+      wx:for="{{galleryMedia}}"
+      wx:for-item="item"
+      wx:for-index="gi"
+      wx:key="src"
+    >
+      <block wx:if="{{item.type === 'video'}}">
+        <video
+          id="gallery-video-{{gi}}"
+          class="g-video"
+          src="{{item.src}}"
+          poster="{{item.poster}}"
+          controls
+          show-center-play-btn
+          show-play-btn
+          enable-play-gesture
+          object-fit="cover"
+          show-mute-btn
+        />
+      </block>
+      <image
+        wx:else
+        class="g-img"
+        src="{{item.src}}"
+        mode="aspectFill"
+        data-i="{{gi}}"
+        bindtap="onPreviewImage"
+      />
+    </swiper-item>
+  </swiper>
+  <view wx:else class="gallery gallery-empty">暂无图片或视频</view>
+
+  <view class="sheet ios-card">
+    <text class="p-name">{{product.name || product.title}}</text>
+    <view class="price-row">
+      <text class="price">¥{{fmt.itemPriceYuan(product)}}</text>
+      <text class="orig" wx:if="{{fmt.itemOriginalYuan(product)}}">¥{{fmt.itemOriginalYuan(product)}}</text>
+    </view>
+    <view class="meta-row">
+      <text class="meta">已售 {{product.sales != null ? product.sales : 0}}</text>
+      <text class="meta dot">·</text>
+      <text class="meta" wx:if="{{currentStock > 0}}">库存 {{currentStock}}</text>
+      <text class="meta stock-out" wx:else>暂时缺货</text>
+    </view>
+    <view class="rate-row" wx:if="{{ratingDisplay > 0}}">
+      <van-rate value="{{ratingDisplay}}" readonly size="16" gutter="4" color="#FFB800" allow-half />
+      <text class="rate-text">{{ratingDisplay}} 分</text>
+      <text class="rate-count" wx:if="{{product.ratingCount}}">（{{product.ratingCount}} 条评价）</text>
+    </view>
+    <view class="rate-row" wx:else>
+      <text class="rate-muted">暂无评分</text>
+    </view>
+
+    <van-cell-group border="{{false}}" custom-class="cell-group">
+      <van-cell
+        wx:if="{{specs.length}}"
+        title="选择规格"
+        value="{{specSummary}}"
+        is-link
+        bind:click="openSpec"
+      />
+      <van-cell title="数量" border="{{false}}">
+        <van-stepper
+          value="{{count}}"
+          min="{{currentStock > 0 ? 1 : 0}}"
+          max="{{currentStock}}"
+          integer
+          disabled="{{currentStock <= 0}}"
+          bind:change="onStepChange"
+        />
+      </van-cell>
+    </van-cell-group>
+  </view>
+
+  <view class="block">
+    <text class="block-title">详情</text>
+    <view class="rich-wrap">
+      <rich-text nodes="{{detailNodes}}" type="html" />
+    </view>
+  </view>
+
+  <view class="block">
+    <text class="block-title">评价</text>
+    <view wx:if="{{reviews.length}}">
+      <view class="review ios-card" wx:for="{{reviews}}" wx:key="_id">
+        <view class="review-head">
+          <text class="nick">{{item.nickName}}</text>
+          <van-rate value="{{item.rating}}" readonly size="12" gutter="2" color="#FFB800" />
+        </view>
+        <text class="review-body">{{item.content}}</text>
+        <text class="review-time">{{item.timeStr}}</text>
+      </view>
+      <van-button
+        wx:if="{{reviewHasMore}}"
+        plain
+        hairline
+        type="primary"
+        size="small"
+        custom-class="more-btn"
+        loading="{{loadingReviews}}"
+        bind:click="loadMoreReviews"
+      >加载更多评价</van-button>
+    </view>
+    <van-empty wx:else description="暂无评价" />
+  </view>
+
+  <!-- 底栏：收藏 / 分享 / 加购 / 购买 -->
+  <view class="spacer" />
+
+  <van-goods-action>
+    <van-goods-action-icon
+      icon="{{isFavorite ? 'like' : 'like-o'}}"
+      text="收藏"
+      bind:click="toggleFavorite"
+    />
+    <van-goods-action-icon icon="share-o" text="分享" open-type="share" />
+    <van-goods-action-button
+      text="加入购物车"
+      type="warning"
+      disabled="{{currentStock <= 0}}"
+      bind:click="addCart"
+    />
+    <van-goods-action-button
+      text="立即购买"
+      type="danger"
+      disabled="{{currentStock <= 0}}"
+      bind:click="buyNow"
+    />
+  </van-goods-action>
+
+  <!-- 规格面板 -->
+  <van-popup
+    show="{{showSpec}}"
+    position="bottom"
+    round
+    closeable
+    bind:close="closeSpec"
+    custom-style="max-height: 70vh;"
+  >
+    <view class="spec-panel">
+      <text class="spec-h">选择规格</text>
+      <block wx:for="{{specs}}" wx:for-item="row" wx:for-index="sx" wx:key="name">
+        <text class="spec-label">{{row.name}}</text>
+        <view class="spec-values">
+          <view
+            wx:for="{{row.values}}"
+            wx:for-item="val"
+            wx:key="*this"
+            class="spec-chip {{selectedSpecs[sx] === val ? 'on' : ''}}"
+            data-sidx="{{sx}}"
+            data-val="{{val}}"
+            bindtap="tapSpecValue"
+          >{{val}}</view>
+        </view>
+      </block>
+      <van-button type="primary" block round bind:click="confirmSpec">完成</van-button>
+    </view>
+  </van-popup>
+</view>
+<view wx:else class="state">商品不存在或已下架</view>

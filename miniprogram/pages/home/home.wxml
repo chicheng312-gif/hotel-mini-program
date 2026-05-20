@@ -1,0 +1,96 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<!-- iOS 风格首页：系统灰背景 + 圆角卡片 + 清晰层级 -->
+<view class="page ios-safe">
+  <!-- 搜索入口 → 搜索页（历史记录、筛选、查询） -->
+  <view class="search-wrap" bindtap="goSearch">
+    <view class="search-pill" hover-class="hover-press" hover-stay-time="80">
+      <text class="search-ico">🔍</text>
+      <text class="search-placeholder">搜索商品、品牌</text>
+    </view>
+  </view>
+
+  <!-- 轮播：云库 swipers；自动播放 + 指示器 -->
+  <view class="swiper-card ios-card" wx:if="{{swipers.length}}">
+    <swiper
+      class="hero-swiper"
+      autoplay
+      circular
+      interval="{{4500}}"
+      duration="{{500}}"
+      indicator-dots
+      indicator-color="rgba(255,255,255,0.35)"
+      indicator-active-color="#FFFFFF"
+    >
+      <swiper-item wx:for="{{swipers}}" wx:key="_id">
+        <view class="hero-slide" data-path="{{item.jumpPath}}" bindtap="onBannerTap">
+          <image class="hero-img" src="{{item.imageUrl}}" mode="aspectFill" />
+          <view class="hero-cap" wx:if="{{item.title}}">
+            <text class="hero-title">{{item.title}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 分类 4x2 宫格 -->
+  <view class="section">
+    <view class="section-head">
+      <text class="section-title">分类</text>
+    </view>
+    <view class="cat-grid" wx:if="{{homeCategories.length}}">
+      <view
+        class="cat-cell ios-card"
+        hover-class="hover-press"
+        hover-stay-time="80"
+        wx:for="{{homeCategories}}"
+        wx:key="_id"
+        data-id="{{item._id}}"
+        bindtap="onCategoryTap"
+      >
+        <image class="cat-icon" src="{{item.imageUrl}}" mode="aspectFill" />
+        <text class="cat-name">{{item.name}}</text>
+      </view>
+    </view>
+    <view wx:else class="empty-hint ios-card">暂无启用分类</view>
+  </view>
+
+  <!-- 推荐双列 + 分页 -->
+  <view class="section section-last">
+    <view class="section-head">
+      <text class="section-title">为你推荐</text>
+      <text class="section-sub" wx:if="{{loading && !products.length}}">加载中…</text>
+    </view>
+    <view class="feed" wx:if="{{products.length}}">
+      <view
+        class="feed-card ios-card"
+        hover-class="hover-press"
+        hover-stay-time="80"
+        wx:for="{{products}}"
+        wx:key="_id"
+        data-id="{{item._id}}"
+        bindtap="openProduct"
+      >
+        <image
+          wx:if="{{item.coverUrl || (item.images && item.images.length)}}"
+          class="feed-cover"
+          src="{{item.coverUrl || item.images[0]}}"
+          mode="aspectFill"
+        />
+        <view class="feed-cover feed-ph" wx:else>图</view>
+        <view class="feed-body">
+          <text class="feed-name">{{item.name || item.title}}</text>
+          <view class="feed-meta">
+            <text class="feed-price">¥{{fmt.itemPriceYuan(item)}}</text>
+            <text class="feed-sales" wx:if="{{item.sales != null}}">{{item.sales}} 人已买</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:elif="{{!loading}}" class="empty-hint ios-card">暂无推荐商品</view>
+
+    <view class="load-more" wx:if="{{products.length}}">
+      <text wx:if="{{loadingMore}}">正在加载…</text>
+      <text wx:elif="{{!hasMore}}">已经到底啦</text>
+    </view>
+  </view>
+</view>
