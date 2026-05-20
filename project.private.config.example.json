@@ -1,0 +1,4 @@
+{
+  "description": "复制本文件为 project.private.config.json，并填入你的小程序 AppID",
+  "appid": "wxYOUR_APPID_HERE"
+}

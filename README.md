@@ -1,12 +1,15 @@
-# 云开发 quickstart
+# 微信小程序-酒店本地特产小商城
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
+## 本地开发配置（AppID）
 
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
+AppID 放在 **`project.private.config.json`**（已加入 `.gitignore`，不会上传到 GitHub）。
 
-## 参考文档
+首次克隆仓库后：
 
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
+```bash
+copy project.private.config.example.json project.private.config.json
+```
 
+然后编辑 `project.private.config.json`，把 `appid` 改成你的小程序 AppID，再用微信开发者工具打开项目。
+
+`project.config.json` 仅保留团队共享的编译、目录等配置，不含 AppID。
